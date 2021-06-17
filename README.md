@@ -40,10 +40,10 @@ Rules, defined in method [createRuleChain](src/main/java/com/gildedrose/GildedRo
 - NoExpiryDateRule
 
 The definition of the rules per item is defined in [buildItemQualityRules](src/main/java/com/gildedrose/rules/AbstractRule.java)
-where the metadata per item is stored in Map with key as a Range (in days) and the value the quality rate value to be applied.
-A fixed qualityValue is set (instead of a rate) is applied to:
+where the quality metadata per item is stored in a Map with `key` as Range (in days) and `value` the quality rate value to be applied.
+A fixed qualityValue is set (instead of a rate) if:
 - items that don't have an expiry date.
-- items where the range does not match the definition.
+- range available for item cannot be matched.
 
 There is a default rule with key `com.gildedrose.rules.IRule.DEFAULT_ITEM` that is applied when the item name cannot be matched.
 
@@ -57,13 +57,13 @@ were extended to cover all the possible kinds of items.
 
 ### Testing rules against items
 
-I have decided to test the rules of the items itself on the unit tests. Initially more tests
-could have been added to ensure the sanity of the ranges like ensure that the ranges within the same rule,
-do not overlap.
+I have decided to test the rules of the items itself on the unit tests. More tests
+could have been added to ensure the sanity of the ranges like ensure that the ranges
+within the same rule, do not overlap, but due to lack of time it was not done.
 
 ### Coverage
 
-Currently coverage is around 80%.
+Currently coverage is around 97% for line and 94% for method.
 
 ## Considerations
 
