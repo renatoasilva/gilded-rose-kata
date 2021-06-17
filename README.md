@@ -63,7 +63,7 @@ within the same rule, do not overlap, but due to lack of time it was not done.
 
 ### Coverage
 
-Currently coverage is around 97% for line and 94% for method.
+Currently the tests cover around 97% for line and 94% for method coverages.
 
 ## Considerations
 
