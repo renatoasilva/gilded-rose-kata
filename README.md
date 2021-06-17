@@ -20,18 +20,18 @@ The logic has many if/else statements which:
 
 To improve the current implementation, the first step is to identify patterns in
 the logic and reuse them. The requirement describes a set of rules that need to be
-applied to items. To make that more explicit, create an interface
-[IRule](src/main/java/com/gildedrose/rules/IRule.java)
-containing two method: one that applies the rule and the second to know
-which rule to apply next.
+applied to items. To make that more explicit, an interface
+[IRule](src/main/java/com/gildedrose/rules/IRule.java) was created
+containing two method:
+- `apply`: applies the rule
+- `setNextRule`: sets which rule to apply next.
 
-Note that the order in which the rules are applied are important as it
-affects the output.
+Note that the order in which the rules are run are important as affects the output.
 
 ### Design pattern
 
-We have a set of rules that need to be applied for each item. Therefore a useful design pattern
-to be used would be chain of responsibilites where each item will a set of the rules applied
+We have a set of rules for each item. Therefore a useful design pattern to be used would be
+chain of responsibilites where each item will a set of the rules applied
 in a sequential order.
 
 Rules, defined in method [createRuleChain](src/main/java/com/gildedrose/GildedRose.java) are:
