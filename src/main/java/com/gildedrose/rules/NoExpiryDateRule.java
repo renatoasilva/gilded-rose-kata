@@ -15,6 +15,6 @@ public class NoExpiryDateRule extends AbstractRule {
             .filter(metadata -> metadata.getQualityRate().isEmpty())
             .ifPresent(metadata -> item.quality = metadata.getQualityValue());
 
-        return true;
+        return applyNextRuleIfExist(item);
     }
 }

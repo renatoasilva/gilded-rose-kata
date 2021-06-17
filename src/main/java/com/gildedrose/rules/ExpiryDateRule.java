@@ -34,21 +34,14 @@ public class ExpiryDateRule extends AbstractRule {
             .findFirst()
             .orElse(itemsQualityRules.get(DEFAULT_ITEM));
 
-        Optional<Integer> rate = itemQualityMetadata.getQualityRate()
+        return itemQualityMetadata.getQualityRate()
             .keySet()
             .stream()
             .filter(r -> r.contains(item.sellIn))
             .map(r -> itemQualityMetadata.getQualityRate().get(r))
-            .findFirst();
-
-        int newQuality;
-        if(rate.isPresent()){
-            newQuality = item.quality+rate.get();
-        } else {
-            newQuality = itemQualityMetadata.getQualityValue();
-        }
-
-        return newQuality;
+            .findFirst()
+            .map(rate -> item.quality + rate)
+            .orElse(itemQualityMetadata.getQualityValue());
     }
 
 
