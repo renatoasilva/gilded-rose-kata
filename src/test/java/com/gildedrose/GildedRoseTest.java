@@ -19,11 +19,14 @@ class GildedRoseTest {
     private static Stream<Arguments> provideStandardItemsAndExpectationsSuccess() {
         //item name, sellIn, quality, expectedSellIn, expectedQuality
         return Stream.of(
-            Arguments.of("Dexterity Vest", 2, 3, 1, 2),
-            Arguments.of("Dexterity Vest", 1, 2, 0, 1),
-            Arguments.of("Dexterity Vest", 0, 1, -1, 0),
-            Arguments.of("Dexterity Vest", -1, 0, -2, 0),
-            Arguments.of("Dexterity Vest", -2, 0, -3, 0)
+            Arguments.of("Dexterity Vest", 2, 10, 1, 9),
+            Arguments.of("Dexterity Vest", 1, 9, 0, 8),
+            Arguments.of("Dexterity Vest", 0, 7, -1, 5),
+            Arguments.of("Dexterity Vest", -1, 5, -2, 3),
+            Arguments.of("Dexterity Vest", -2, 3, -3, 1),
+            Arguments.of("Dexterity Vest", -3, 1, -4, 0),
+            Arguments.of("Dexterity Vest", -4, 0, -5, 0),
+            Arguments.of("Dexterity Vest", -5, -1, -6, 0)
         );
     }
 
@@ -109,8 +112,6 @@ class GildedRoseTest {
         Item[] items = new Item[] { new Item(itemName, sellIn, quality) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        assertEquals(itemName, app.items[0].name);
-        assertEquals(expectedSellIn, app.items[0].sellIn);
-        assertEquals(expectedQuality, app.items[0].quality);
+        Util.assertItem(app.items[0], itemName, expectedSellIn, expectedQuality);
     }
 }

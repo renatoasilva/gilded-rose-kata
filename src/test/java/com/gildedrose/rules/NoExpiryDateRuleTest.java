@@ -11,13 +11,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class DecreaseSellInRuleTest {
+class NoExpiryDateRuleTest {
 
-    private DecreaseSellInRule underTest;
+    private NoExpiryDateRule underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new DecreaseSellInRule();
+        underTest = new NoExpiryDateRule();
     }
 
     @ParameterizedTest
@@ -31,10 +31,15 @@ class DecreaseSellInRuleTest {
     private static Stream<Arguments> provideItemsAndExpectations() {
         //item name, sellIn, quality, expectedSellIn, expectedQuality
         return Stream.of(
-            Arguments.of("ItemA", 3, 12, 2, 12),
-            Arguments.of("ItemA", 1, 10, 0, 10),
-            Arguments.of("ItemA", 0, 10, -1, 10),
-            Arguments.of("ItemA", -1, 10, -2, 10)
+            Arguments.of("StandardItem", 3, 12, 3, 12),
+            Arguments.of("StandardItem", 1, 10, 1, 10),
+            Arguments.of("StandardItem", 0, 10, 0, 10),
+            Arguments.of("StandardItem", -1, 10, -1, 10),
+            Arguments.of("Sulfuras", 1, 10, 1, 80), //Sulfuras quality is always 80
+            Arguments.of("Sulfuras", 0, 10, 0, 80),
+            Arguments.of("Sulfuras", -1, 10, -1, 80),
+            Arguments.of("Sulfuras", -2, 10, -2, 80)
+
         );
     }
 }

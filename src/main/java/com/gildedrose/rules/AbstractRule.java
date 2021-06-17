@@ -46,8 +46,8 @@ public abstract class AbstractRule implements IRule {
     private Map<String, ItemQualityMetadata> buildItemQualityRules(){
         Map<String, ItemQualityMetadata> itemsMetadata = new HashMap<>();
         Map<Range, Integer> expiryRate = new HashMap<>();
-        expiryRate.put(Range.between(0, Integer.MAX_VALUE), -1);
-        expiryRate.put(Range.between(Integer.MIN_VALUE, -1), -2);
+        expiryRate.put(Range.between(1, Integer.MAX_VALUE), -1);
+        expiryRate.put(Range.between(Integer.MIN_VALUE, 0), -2);
         itemsMetadata.put(DEFAULT_ITEM, new ItemQualityMetadata(expiryRate));
 
         expiryRate = new HashMap<>();
