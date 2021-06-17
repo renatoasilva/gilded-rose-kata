@@ -55,6 +55,16 @@ To ensure that the new built logic is correct for the existing items,
 the tests in [GildedRoseTest.java](src/test/java/com/gildedrose/GildedRoseTest.java)
 were extended to cover all the possible kinds of items.
 
+### Testing rules against items
+
+I have decided to test the rules of the items itself on the unit tests. Initially more tests
+could have been added to ensure the sanity of the ranges like ensure that the ranges within the same rule,
+do not overlap.
+
+### Coverage
+
+Currently coverage is around 80%.
+
 ## Considerations
 
 Using a "name" as a key is not ideal, since it is prone to errors:

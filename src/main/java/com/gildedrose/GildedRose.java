@@ -38,8 +38,6 @@ class GildedRose {
         return expiryDateRule;
     }
 
-//    Item[] items;
-//
 //    public GildedRose(Item[] items) {
 //        this.items = items;
 //    }
