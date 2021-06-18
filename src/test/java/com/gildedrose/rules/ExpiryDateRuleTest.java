@@ -43,9 +43,9 @@ class ExpiryDateRuleTest {
             Arguments.of("Aged Brie", 0, 4, 0, 6), //double increase in quality for sellIn <=0
             Arguments.of("Aged Brie", -1, 6, -1, 8),
 
-            Arguments.of("Sulfuras", 0, 10, 0, 50), // item has no quality rules, but this rule caps to 50
-            Arguments.of("Sulfuras", -1, 10, -1, 50),
-            Arguments.of("Sulfuras", -2, 10, -2, 50),
+            Arguments.of("Sulfuras", 0, 10, 0, 80),
+            Arguments.of("Sulfuras", -1, 10, -1, 80),
+            Arguments.of("Sulfuras", -2, 10, -2, 80),
 
             Arguments.of("Backstage passes", 15, 20, 15, 21), //item quality increases in time
             Arguments.of("Backstage passes", 14, 21, 14, 22),

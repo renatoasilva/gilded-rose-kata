@@ -2,20 +2,18 @@ package com.gildedrose.rules;
 
 import com.gildedrose.model.Item;
 import com.gildedrose.model.ItemQualityMetadata;
-import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 
 public class ExpiryDateRule extends AbstractRule {
 
     @Override
     public boolean apply(Item item) {
-        if(!isApplicable()){
+        if (!isApplicable()) {
             return applyNextRuleIfExist(item);
         }
 
         int newQuality = applyRule(item);
         newQuality = Math.max(MIN_QUALITY, newQuality);
-        newQuality = Math.min(MAX_QUALITY, newQuality);
         item.quality = newQuality;
 
         return applyNextRuleIfExist(item);
@@ -26,7 +24,7 @@ public class ExpiryDateRule extends AbstractRule {
         return true;
     }
 
-    protected int applyRule(Item item){
+    protected int applyRule(Item item) {
         final ItemQualityMetadata itemQualityMetadata = itemsQualityRules.keySet()
             .stream()
             .filter(s -> StringUtils.startsWithIgnoreCase(item.name, s))
@@ -34,7 +32,7 @@ public class ExpiryDateRule extends AbstractRule {
             .findFirst()
             .orElse(itemsQualityRules.get(DEFAULT_ITEM));
 
-        return itemQualityMetadata.getQualityRate()
+        int newQuality = itemQualityMetadata.getQualityRate()
             .keySet()
             .stream()
             .filter(r -> r.contains(item.sellIn))
@@ -42,6 +40,8 @@ public class ExpiryDateRule extends AbstractRule {
             .findFirst()
             .map(rate -> item.quality + rate)
             .orElse(itemQualityMetadata.getQualityValue());
+
+        return Math.min(itemQualityMetadata.getMaxQuality(), newQuality);
     }
 
 
