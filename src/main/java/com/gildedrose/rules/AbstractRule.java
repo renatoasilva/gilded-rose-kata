@@ -4,6 +4,7 @@ import com.gildedrose.model.Item;
 import com.gildedrose.model.ItemQualityMetadata;
 import com.gildedrose.repo.ItemRepository;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The type Abstract rule.
@@ -13,7 +14,7 @@ public abstract class AbstractRule implements IRule {
     /**
      * A map containing the quality rules per item.
      */
-    protected final Map<String, ItemQualityMetadata> itemsQualityRules = new ItemRepository().getItemsQualityRules();
+    protected final Map<String, ItemQualityMetadata> itemsQualityRules = new ItemRepository().getItemsQualityMetadata();
     /**
      * The Next rule to be applied
      */
@@ -34,6 +35,15 @@ public abstract class AbstractRule implements IRule {
             return this.nextRule.apply(item);
         }
         return false;
+    }
+
+    protected ItemQualityMetadata getItemQualityMetadata(Item item){
+        return itemsQualityRules.keySet()
+            .stream()
+            .filter(s -> StringUtils.startsWithIgnoreCase(item.name, s))
+            .map(s -> itemsQualityRules.get(s))
+            .findFirst()
+            .orElse(itemsQualityRules.get(DEFAULT_ITEM));
     }
 
 }

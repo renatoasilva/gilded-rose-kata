@@ -29,11 +29,9 @@ class GildedRose {
      */
     private IRule createChainOfRules() {
         DecreaseSellInRule decreaseSellIn = new DecreaseSellInRule();
-        NoExpiryDateRule noExpiryDateRule = new NoExpiryDateRule();
         ExpiryDateRule expiryDateRule = new ExpiryDateRule();
 
         expiryDateRule.setNextRule(decreaseSellIn);
-        decreaseSellIn.setNextRule(noExpiryDateRule);
 
         return expiryDateRule;
     }

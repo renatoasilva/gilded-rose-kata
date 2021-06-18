@@ -8,23 +8,23 @@ import org.apache.commons.lang3.Range;
 
 public class ItemRepository {
 
-    private final Map<String, ItemQualityMetadata> itemsQualityRules;
+    private final Map<String, ItemQualityMetadata> itemsQualityMetadata;
 
     public ItemRepository() {
-        this.itemsQualityRules = buildItemQualityRules();
+        this.itemsQualityMetadata = buildItemQualityMetadata();
     }
 
-    public Map<String, ItemQualityMetadata> getItemsQualityRules() {
-        return itemsQualityRules;
+    public Map<String, ItemQualityMetadata> getItemsQualityMetadata() {
+        return itemsQualityMetadata;
     }
 
     /**
-     * Builds quality rules per item
+     * Defines the quality metadata per item
      *
      * @return a map with key the item description (or prefix) and with value the quality rules to
      * be applied.
      */
-    private Map<String, ItemQualityMetadata> buildItemQualityRules(){
+    private Map<String, ItemQualityMetadata> buildItemQualityMetadata(){
         Map<String, ItemQualityMetadata> itemsMetadata = new HashMap<>();
         Map<Range, Integer> expiryRate = new HashMap<>();
         expiryRate.put(Range.between(1, Integer.MAX_VALUE), -1);
@@ -36,19 +36,20 @@ public class ItemRepository {
         expiryRateAgeBrie.put(Range.between(Integer.MIN_VALUE, 0), 2);
         itemsMetadata.put("Aged Brie", new ItemQualityMetadata(expiryRateAgeBrie));
 
-        expiryRate = new HashMap<>();
-        itemsMetadata.put("Sulfuras", new ItemQualityMetadata(expiryRate, 80, 80, false));
+        Map<Range, Integer> expiryRateSulfuras = new HashMap<>();
+        expiryRateSulfuras.put(Range.between(Integer.MIN_VALUE, Integer.MAX_VALUE), 80);
+        itemsMetadata.put("Sulfuras", new ItemQualityMetadata(expiryRateSulfuras, 80, 80, false));
 
-        expiryRate = new HashMap<>();
-        expiryRate.put(Range.between(11, Integer.MAX_VALUE), 1);
-        expiryRate.put(Range.between(6, 10), 2);
-        expiryRate.put(Range.between(1, 5), 3);
-        itemsMetadata.put("Backstage passes", new ItemQualityMetadata(expiryRate, 0));
+        Map<Range, Integer> expiryRateBackstage = new HashMap<>();
+        expiryRateBackstage.put(Range.between(11, Integer.MAX_VALUE), 1);
+        expiryRateBackstage.put(Range.between(6, 10), 2);
+        expiryRateBackstage.put(Range.between(1, 5), 3);
+        itemsMetadata.put("Backstage passes", new ItemQualityMetadata(expiryRateBackstage, 0));
 
-        expiryRate = new HashMap<>();
-        expiryRate.put(Range.between(1, Integer.MAX_VALUE), -2);
-        expiryRate.put(Range.between(Integer.MIN_VALUE, 0), -4);
-        itemsMetadata.put("Conjured", new ItemQualityMetadata(expiryRate));
+        Map<Range, Integer>  expiryRateConjured = new HashMap<>();
+        expiryRateConjured.put(Range.between(1, Integer.MAX_VALUE), -2);
+        expiryRateConjured.put(Range.between(Integer.MIN_VALUE, 0), -4);
+        itemsMetadata.put("Conjured", new ItemQualityMetadata(expiryRateConjured));
 
         return itemsMetadata;
     }

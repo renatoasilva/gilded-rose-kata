@@ -8,12 +8,7 @@ public class DecreaseSellInRule extends AbstractRule {
 
     @Override
     public boolean apply(Item item) {
-        final ItemQualityMetadata itemQualityMetadata = itemsQualityRules.keySet()
-            .stream()
-            .filter(s -> StringUtils.startsWithIgnoreCase(item.name, s))
-            .map(s -> itemsQualityRules.get(s))
-            .findFirst()
-            .orElse(itemsQualityRules.get(DEFAULT_ITEM));
+        final ItemQualityMetadata itemQualityMetadata = getItemQualityMetadata(item);
 
         if(itemQualityMetadata.isQualityVariable()){
             item.sellIn = item.sellIn - 1;
