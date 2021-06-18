@@ -4,7 +4,6 @@ import com.gildedrose.model.Item;
 import com.gildedrose.rules.DecreaseSellInRule;
 import com.gildedrose.rules.ExpiryDateRule;
 import com.gildedrose.rules.IRule;
-import com.gildedrose.rules.NoExpiryDateRule;
 
 class GildedRose {
 
